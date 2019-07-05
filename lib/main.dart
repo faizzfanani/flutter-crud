@@ -10,6 +10,7 @@ void main() {
   runApp(new MaterialApp(
     title:"My App",
     home: new MyHomePage(),
+    routes: {'/main': (context) => MyHomePage(),},
     ));
 }
 

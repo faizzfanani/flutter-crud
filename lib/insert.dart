@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'main.dart';
-
 class addData extends StatefulWidget {
   @override
   _addDataState createState() => _addDataState();
@@ -58,11 +57,11 @@ class _addDataState extends State<addData> {
                   color: Colors.blueAccent,
                   onPressed: () {
                     addData();
-                    Navigator.of(context).pop(
-                        new MaterialPageRoute(
+                    Navigator.of(context).pushReplacement(
+                      new MaterialPageRoute(
                         builder: (BuildContext context)=> new MyHomePage(),
-            )
-          );
+                      )
+                    );
                   },
                 )
               ],

@@ -72,7 +72,11 @@ class _updateDataState extends State<updateData> {
                   color: Colors.blueAccent,
                   onPressed: () {
                     updateData();
-                    Navigator.popAndPushNamed(context, 'main.dart');
+                    Navigator.of(context).pushReplacement(
+                      new MaterialPageRoute(
+                        builder: (BuildContext context)=> new MyHomePage(),
+                      )
+                    );
                   },
                 )
               ],

@@ -16,7 +16,7 @@ class _DetailState extends State<Detail> {
   var url="http://192.168.1.17/flutter_crud/delete.php";
   http.post(url, body: {
     'id': widget.list[widget.index]['id']
-  });
+  });  
 }
 
 void confirm (){
@@ -28,11 +28,11 @@ void confirm (){
         color: Colors.red,
         onPressed: (){
           deleteData();
-          Navigator.of(context).pop(
-            new MaterialPageRoute(
-              builder: (BuildContext context)=> new MyHomePage(),
-            )
-          );
+          Navigator.of(context).push(
+                      new MaterialPageRoute(
+                        builder: (BuildContext context)=> new MyHomePage(),
+                      )
+                    );
         },
       ),
       new RaisedButton(
