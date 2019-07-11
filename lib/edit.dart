@@ -21,7 +21,7 @@ class _updateDataState extends State<updateData> {
   TextEditingController controllerSalary = new TextEditingController();
 
   void updateData() {
-      var url="http://192.168.1.17/flutter_crud/update.php";
+      var url="http://192.168.1.3/flutter_crud/update.php";
       http.post(url,body: {
         "id": widget.list[widget.index]['id'],
         "name": controllerName.text,

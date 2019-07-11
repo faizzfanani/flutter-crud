@@ -1,19 +1,23 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_crud/login.dart';
 import "package:http/http.dart" as http;
 import 'dart:convert';
 import 'Detail.dart';
 import 'insert.dart';
 
 void main() {
-  runApp(new MaterialApp(
-    title:"My App",
-    home: new MyHomePage(),
-    routes: {'/main': (context) => MyHomePage(),},
-    ));
+  runApp(new MyApp());
 }
-
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: new Login(),
+    );
+  }
+}
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => new _MyHomePageState();
@@ -22,7 +26,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   Future<List> getData() async {
     final response =
-        await http.get("http://192.168.1.17/flutter_crud/getdata.php");
+        await http.get("http://192.168.1.3/flutter_crud/getdata.php");
     return json.decode(response.body);
   }
 
