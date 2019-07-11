@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_crud/Register.dart';
-import 'main.dart';
+import 'package:flutter/widgets.dart';
 
-class Login extends StatefulWidget {
+class Register extends StatefulWidget {
   @override
-  _LoginState createState() => _LoginState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
+class _RegisterState extends State<Register> {
    @override
   void initState() {
     SystemChrome.setEnabledSystemUIOverlays([]);
@@ -56,7 +55,7 @@ class _LoginState extends State<Login> {
             Container(
               height: MediaQuery.of(context).size.height/2,
               width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.only(top: 62),
+              padding: EdgeInsets.only(top: 42),
               child: Column(
                 children: <Widget>[
                   Container(
@@ -114,31 +113,43 @@ class _LoginState extends State<Login> {
                         ),
                         hintText: 'Password',
                       ),
-                    ),
+                    ),                  
                   ),
-
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        top: 16, right: 32
-                      ),
-                      child: Text('Forgot Password ?',
-                        style: TextStyle(
-                          color: Colors.grey
+                  Container(
+                    width: MediaQuery.of(context).size.width/1.2,
+                    height: 45,
+                    margin: EdgeInsets.only(top: 16),
+                    padding: EdgeInsets.only(
+                        top: 4,left: 16, right: 16, bottom: 4
+                    ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(50)
                         ),
-                      ),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 5
+                          )
+                        ]
                     ),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        icon: Icon(Icons.vpn_key,
+                          color: Colors.grey,
+                        ),
+                        hintText: 'Confirm password',
+                      ),
+                    ),                  
                   ),
+                  
                   Spacer(),
 
                   new GestureDetector(
                     onTap: (){
-                      Navigator.of(context).push(
-                      new MaterialPageRoute(
-                        builder: (BuildContext context)=> new MyHomePage(),
-                      )
-                    );
+                      Navigator.of(context).pop(context);
                     },
                     child: new Container(                  
                     height: 45,
@@ -155,7 +166,7 @@ class _LoginState extends State<Login> {
                       )
                     ),
                     child: Center(
-                      child: Text('Login'.toUpperCase(),
+                      child: Text('Register'.toUpperCase(),
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold
@@ -164,40 +175,16 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   ),
-                  
                   Spacer(),
-                  new Text('or',
+                  Spacer(), 
+                  new GestureDetector(
+                    onTap: (){
+                      Navigator.of(context).pop(context);
+                    },
+                    child: new Text('already have an account?',
                     style: TextStyle(
                       color: Colors.grey
                     ),),
-                  Spacer(),
-                  new GestureDetector(
-                    onTap: (){
-                      Navigator.of(context).push(
-                      new MaterialPageRoute(
-                        builder: (BuildContext context)=> new Register(),
-                      )
-                    );
-                    },
-                    child: new Container(                  
-                    height: 45,
-                    width: MediaQuery.of(context).size.width/1.2,
-                    decoration: BoxDecoration(
-                      border: new Border.all(color: Color(0xff33313b)
-                        ),                      
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10)
-                      )
-                    ),
-                    child: Center(
-                      child: Text('Register'.toUpperCase(),
-                        style: TextStyle(
-                          color: Color(0xff33313b),
-                          fontWeight: FontWeight.bold
-                        ),
-                      ),
-                    ),
-                  ),
                   )
                 ],
               ),
