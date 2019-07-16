@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:http/http.dart' as http;
 
 class Register extends StatefulWidget {
   @override
@@ -8,17 +9,30 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-   @override
+  TextEditingController controllerName = new TextEditingController();
+  TextEditingController controllerEmail = new TextEditingController();
+  TextEditingController controllerPassword = new TextEditingController();
+  TextEditingController controllerConfirmPassword = new TextEditingController();
+
+  void addData(){
+  var url="http://192.168.1.19/flutter_crud/insertadmin.php";
+
+  http.post(url, body: {
+    "name": controllerName.text,
+    "email": controllerEmail.text,
+    "password": controllerPassword.text
+  });
+}
+  @override
   void initState() {
     SystemChrome.setEnabledSystemUIOverlays([]);
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(      
+    return Scaffold(     
       body: Container(
-        child: SingleChildScrollView(
-        child: Column(
+        child: ListView(
           children: <Widget>[
             Container(
               width: MediaQuery.of(context).size.width,
@@ -51,13 +65,12 @@ class _RegisterState extends State<Register> {
                 ],
               ),
             ),
-
             Container(
-              height: MediaQuery.of(context).size.height/2,
+              height: MediaQuery.of(context).size.height/1.5,
               width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.only(top: 42),
+              padding: EdgeInsets.only(top: 42, bottom: 30),
               child: Column(
-                children: <Widget>[
+                children: <Widget>[                  
                   Container(
                     width: MediaQuery.of(context).size.width/1.2,
                     height: 45,
@@ -77,12 +90,13 @@ class _RegisterState extends State<Register> {
                       ]
                     ),
                     child: TextField(
+                      controller: controllerName,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        icon: Icon(Icons.email,
+                        icon: Icon(Icons.person,
                             color: Colors.grey,
                         ),
-                          hintText: 'Email',
+                          hintText: 'Name',
                       ),
                     ),
                   ),
@@ -106,6 +120,38 @@ class _RegisterState extends State<Register> {
                         ]
                     ),
                     child: TextField(
+                      controller: controllerEmail,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        icon: Icon(Icons.email,
+                          color: Colors.grey,
+                        ),
+                        hintText: 'Email',
+                      ),
+                    ),                  
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width/1.2,
+                    height: 45,
+                    margin: EdgeInsets.only(top: 16),
+                    padding: EdgeInsets.only(
+                        top: 4,left: 16, right: 16, bottom: 4
+                    ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(50)
+                        ),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 5
+                          )
+                        ]
+                    ),
+                    child: TextField(
+                      controller: controllerPassword,
+                      obscureText: true,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         icon: Icon(Icons.vpn_key,
@@ -115,6 +161,7 @@ class _RegisterState extends State<Register> {
                       ),
                     ),                  
                   ),
+                  
                   Container(
                     width: MediaQuery.of(context).size.width/1.2,
                     height: 45,
@@ -135,6 +182,8 @@ class _RegisterState extends State<Register> {
                         ]
                     ),
                     child: TextField(
+                      controller: controllerConfirmPassword,
+                      obscureText: true,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         icon: Icon(Icons.vpn_key,
@@ -144,12 +193,15 @@ class _RegisterState extends State<Register> {
                       ),
                     ),                  
                   ),
-                  
+                  Spacer(),
                   Spacer(),
 
-                  new GestureDetector(
+                  GestureDetector(
                     onTap: (){
-                      Navigator.of(context).pop(context);
+                      if(controllerPassword.text == controllerConfirmPassword.text){
+                        addData();
+                        Navigator.of(context).pop(context);
+                      }                      
                     },
                     child: new Container(                  
                     height: 45,
@@ -176,8 +228,7 @@ class _RegisterState extends State<Register> {
                   ),
                   ),
                   Spacer(),
-                  Spacer(), 
-                  new GestureDetector(
+                  GestureDetector(
                     onTap: (){
                       Navigator.of(context).pop(context);
                     },
@@ -191,7 +242,7 @@ class _RegisterState extends State<Register> {
             )
           ],
         ),)
-      ),
+      
     );
   }
 }

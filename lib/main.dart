@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
-          title: new Text("CRUD Pegawai"),
+          title: new Text("Employees's data"),
         ),
         floatingActionButton: new FloatingActionButton(
         child: new Icon(Icons.add),
