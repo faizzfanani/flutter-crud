@@ -5,61 +5,17 @@ import 'package:flutter/services.dart';
 import 'package:flutter_crud/Register.dart';
 import 'package:flutter_crud/dashboard.dart';
 import 'package:http/http.dart' as http;
-import 'package:async/async.dart';
-import 'main.dart';
 
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginState extends State<Login> { 
   TextEditingController email = new TextEditingController();
   TextEditingController password = new TextEditingController();
-
-  var url="http://192.168.1.19/flutter_crud/insertadmin.php";
-  
-  void login(){
-
-  http.post(url, body: {
-    "email": email.text,
-    "password": password.text
-  });
-}
-  String msg = '';
-  Future<dynamic> getJson(Uri uri) async {
-    http.Response response = await http.post(uri);
-    return json.decode(response.body);
-  }
-
-
-  Future<List> _login() async {
-    final response = await http.post(url, body: {
-      "username": email.text,
-      "password": password.text,
-    });
-
-    print(response);
-    var datauser = json.decode(response.body);
-
-    if (datauser.length == 0) {
-      setState(() {
-        msg = "Login Fail";
-      });
-    } else {
-      if (datauser[0]['level'] == 'admin') {
-        Navigator.pushReplacementNamed(context, '/AdminPage');
-      } else if (datauser[0]['level'] == 'member') {
-        Navigator.pushReplacementNamed(context, '/MemberPage');
-      }
-
-      setState(() {
-        email = datauser[0]['username'];
-      });
-    }
-
-    return datauser;
-  }
+  var data;
+  var _isSecured = true;
 
   @override
   void initState() {
@@ -68,6 +24,54 @@ class _LoginState extends State<Login> {
   }
   @override
   Widget build(BuildContext context) {
+    Future<String> getLogin(String email) async {
+      var response = await http.get(
+          Uri.encodeFull(
+              "http://192.168.1.19/flutter_crud/login.php?PSEUDO=${email}"),
+          headers: {"Accept": "application/json"});
+
+      print(response.body);
+      setState(() {
+        var convertDataToJson = json.decode(response.body);
+        data = convertDataToJson['result'];
+      });
+    }
+    /*********************Alert Dialog Password******************************/
+    void onSignedInErrorPassword() {
+      var alert = new AlertDialog(
+        title: new Text("Password incorrect"),
+        content: new Text(
+            "Use the correct password !"),
+      );
+      showDialog(context: context, child: alert);
+    }
+
+    /*********************Alert Dialog Pseudo******************************/
+    void onSignedInErrorPseudo() {
+      var alert = new AlertDialog(
+        title: new Text("Email incorrect"),
+        content:
+            new Text("Email is wrong or not registered"),
+      );
+      showDialog(context: context, child: alert);
+    }
+
+    /******************* Check Data ****************************/
+    VerifData(String email, String password, var datadb) {
+      if (data[0]['email'] == email) {
+        if (data[0]['password'] == password) {
+          var route = new MaterialPageRoute(
+            builder: (BuildContext context) =>
+                new Dashboard(),
+          );
+          Navigator.of(context).push(route);
+        } else {
+          onSignedInErrorPassword();
+        }
+      } else {
+        onSignedInErrorPseudo();
+      }
+    }
     return Scaffold(      
       body: Container(
         child: SingleChildScrollView(
@@ -130,6 +134,7 @@ class _LoginState extends State<Login> {
                       ]
                     ),
                     child: TextField(
+                      controller: email,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         icon: Icon(Icons.email,
@@ -159,8 +164,9 @@ class _LoginState extends State<Login> {
                         ]
                     ),
                     child: TextField(
+                      controller: password,
                       obscureText: true,
-                      decoration: InputDecoration(
+                      decoration: InputDecoration(                      
                         border: InputBorder.none,
                         icon: Icon(Icons.vpn_key,
                           color: Colors.grey,
@@ -187,11 +193,13 @@ class _LoginState extends State<Login> {
 
                   new GestureDetector(
                     onTap: (){
-                      Navigator.of(context).push(
-                      new MaterialPageRoute(
-                        builder: (BuildContext context)=> new Dashboard(),
-                      )
-                    );
+                      getLogin(email.text);
+                      VerifData(email.text, password.text, data);
+                    //   Navigator.of(context).push(
+                    //   new MaterialPageRoute(
+                    //     builder: (BuildContext context)=> new Dashboard(),
+                    //   )
+                    // );
                     },
                     child: new Container(                  
                     height: 45,
