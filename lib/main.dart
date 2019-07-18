@@ -1,7 +1,15 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_crud/help.dart';
 import 'package:flutter_crud/login.dart';
+import 'package:flutter_crud/message.dart';
+import 'package:flutter_crud/positioning.dart';
+import 'package:flutter_crud/profile.dart';
+import 'package:flutter_crud/salary.dart';
+import 'package:flutter_crud/setting.dart';
+import 'package:flutter_crud/statistic.dart';
+import 'package:flutter_crud/todolist.dart';
 import "package:http/http.dart" as http;
 import 'dart:convert';
 import 'Detail.dart';
@@ -15,6 +23,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: new Login(),
+      routes: <String,WidgetBuilder>{
+        '/dataemployee': (BuildContext context)=> new MyHomePage(),
+        '/profile': (BuildContext context)=> new Profile(),
+        '/todolist': (BuildContext context)=> new ToDoList(),
+        '/salary': (BuildContext context)=> new Salary(),
+        '/positioning': (BuildContext context)=> new Position(),
+        '/statistic': (BuildContext context)=> new Statistic(),
+        '/about': (BuildContext context)=> new Help(),
+        '/message': (BuildContext context)=> new Message(),
+        '/setting': (BuildContext context)=> new Setting(),
+      },
     );
   }
 }
@@ -26,7 +45,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   Future<List> getData() async {
     final response =
-        await http.get("http://192.168.1.3/flutter_crud/getdata.php");
+        await http.get("http://192.168.1.19/flutter_crud/getdata.php");
     return json.decode(response.body);
   }
 
@@ -35,6 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return new Scaffold(
         appBar: new AppBar(
           title: new Text("Employees's data"),
+          backgroundColor: Color(0xff33313b),
         ),
         floatingActionButton: new FloatingActionButton(
         child: new Icon(Icons.add),

@@ -13,7 +13,7 @@ class _addDataState extends State<addData> {
   TextEditingController controllerSalary = new TextEditingController();
 
   void addData(){
-  var url="http://192.168.1.3/flutter_crud/insert.php";
+  var url="http://192.168.1.19/flutter_crud/insert.php";
 
   http.post(url, body: {
     "name": controllerName.text,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_crud/Detail.dart';
 import 'package:flutter_crud/main.dart';
 
 class Dashboard extends StatefulWidget {
@@ -18,13 +20,13 @@ class _DashboardState extends State<Dashboard> {
   ];
   @override
   void initState() {
+    SystemChrome.setEnabledSystemUIOverlays([]);
     super.initState();
-    pageController = PageController(initialPage: 1, viewportFraction: 0.8);
+    pageController = PageController(initialPage: 1, viewportFraction: 0.8);    
   }
   
   @override
-  Widget build(BuildContext context) {
-    
+  Widget build(BuildContext context) {    
     return Scaffold( 
       body: Container(
         child: ListView( 
@@ -103,22 +105,23 @@ class _DashboardState extends State<Dashboard> {
 }
 
 class Choice {
-  const Choice({this.title, this.icon});
+  const Choice({this.title, this.icon, this.route});
 
   final String title;
   final IconData icon;
+  final String route;
 }
 
 const List<Choice> choices = const <Choice>[
-  const Choice(title: 'My Profile', icon: Icons.person),
-  const Choice(title: 'Employees', icon: Icons.group),
-  const Choice(title: 'To do list', icon: Icons.list),
-  const Choice(title: 'Salary', icon: Icons.attach_money),
-  const Choice(title: 'Positioning', icon: Icons.arrow_upward),
-  const Choice(title: 'Statistics', icon: Icons.show_chart),
-  const Choice(title: 'About', icon: Icons.help_outline),
-  const Choice(title: 'Messages', icon: Icons.drafts),
-  const Choice(title: 'Setting', icon: Icons.settings),
+  const Choice(title: 'My Profile', icon: Icons.person, route: '/profile'),
+  const Choice(title: 'Employees', icon: Icons.group, route: '/dataemployee'),
+  const Choice(title: 'To do list', icon: Icons.list, route: '/todolist'),
+  const Choice(title: 'Salary', icon: Icons.attach_money, route: '/salary'),
+  const Choice(title: 'Positioning', icon: Icons.arrow_upward, route: '/positioning'),
+  const Choice(title: 'Statistics', icon: Icons.show_chart, route: '/statistic'),
+  const Choice(title: 'About', icon: Icons.help_outline, route: '/about'),
+  const Choice(title: 'Messages', icon: Icons.drafts, route: '/message'),
+  const Choice(title: 'Setting', icon: Icons.settings, route: '/setting'),
 ];
 
 class ChoiceCard extends StatelessWidget {
@@ -126,9 +129,13 @@ class ChoiceCard extends StatelessWidget {
   final Choice choice;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
     final TextStyle textStyle = Theme.of(context).textTheme.display1;
-        return Card(
+        return new GestureDetector(
+          onTap: (){
+            Navigator.pushNamed(context, choice.route);
+          },
+          child: Card(
           color: Colors.white,
           child: Center(child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -139,6 +146,8 @@ class ChoiceCard extends StatelessWidget {
           ]
         ),
       )
-    );
+    )
+        );
+        
   }
 }

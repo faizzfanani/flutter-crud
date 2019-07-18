@@ -90,6 +90,7 @@ class _RegisterState extends State<Register> {
                       ]
                     ),
                     child: TextField(
+                      keyboardType: TextInputType.text,
                       controller: controllerName,
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -120,6 +121,7 @@ class _RegisterState extends State<Register> {
                         ]
                     ),
                     child: TextField(
+                      keyboardType: TextInputType.emailAddress,
                       controller: controllerEmail,
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -150,6 +152,7 @@ class _RegisterState extends State<Register> {
                         ]
                     ),
                     child: TextField(
+                      keyboardType: TextInputType.text,
                       controller: controllerPassword,
                       obscureText: true,
                       decoration: InputDecoration(
@@ -182,6 +185,7 @@ class _RegisterState extends State<Register> {
                         ]
                     ),
                     child: TextField(
+                      keyboardType: TextInputType.text,
                       controller: controllerConfirmPassword,
                       obscureText: true,
                       decoration: InputDecoration(

@@ -13,7 +13,7 @@ class Detail extends StatefulWidget {
 
 class _DetailState extends State<Detail> {
   void deleteData(){
-  var url="http://192.168.1.3/flutter_crud/delete.php";
+  var url="http://192.168.1.19/flutter_crud/delete.php";
   http.post(url, body: {
     'id': widget.list[widget.index]['id']
   });  
@@ -48,7 +48,9 @@ void confirm (){
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(title: new Text("${widget.list[widget.index]['nama']}")),
+      appBar: new AppBar(
+        title: new Text("${widget.list[widget.index]['nama']}"),
+        backgroundColor: Color(0xff33313b),),
       body: new Container(
         height: 270.0, 
         padding: const EdgeInsets.all(20.0),

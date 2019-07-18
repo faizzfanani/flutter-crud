@@ -21,7 +21,7 @@ class _updateDataState extends State<updateData> {
   TextEditingController controllerSalary = new TextEditingController();
 
   void updateData() {
-      var url="http://192.168.1.3/flutter_crud/update.php";
+      var url="http://192.168.1.19/flutter_crud/update.php";
       http.post(url,body: {
         "id": widget.list[widget.index]['id'],
         "name": controllerName.text,
@@ -42,6 +42,7 @@ class _updateDataState extends State<updateData> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("EDIT DATA"),
+        backgroundColor: Color(0xff33313b),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),

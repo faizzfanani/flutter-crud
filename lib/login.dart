@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_crud/Register.dart';
@@ -56,8 +55,9 @@ class _LoginState extends State<Login> {
       showDialog(context: context, child: alert);
     }
 
-    /******************* Check Data ****************************/
+    /******************* Check Data ****************************/    
     VerifData(String email, String password, var datadb) {
+      getLogin(email);
       if (data[0]['email'] == email) {
         if (data[0]['password'] == password) {
           var route = new MaterialPageRoute(
@@ -134,6 +134,7 @@ class _LoginState extends State<Login> {
                       ]
                     ),
                     child: TextField(
+                      keyboardType: TextInputType.emailAddress,
                       controller: email,
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -164,6 +165,7 @@ class _LoginState extends State<Login> {
                         ]
                     ),
                     child: TextField(
+                      keyboardType: TextInputType.text,
                       controller: password,
                       obscureText: true,
                       decoration: InputDecoration(                      
@@ -192,14 +194,8 @@ class _LoginState extends State<Login> {
                   Spacer(),
 
                   new GestureDetector(
-                    onTap: (){
-                      getLogin(email.text);
-                      VerifData(email.text, password.text, data);
-                    //   Navigator.of(context).push(
-                    //   new MaterialPageRoute(
-                    //     builder: (BuildContext context)=> new Dashboard(),
-                    //   )
-                    // );
+                    onTap: (){    
+                      VerifData(email.text, password.text, data);                      
                     },
                     child: new Container(                  
                     height: 45,
