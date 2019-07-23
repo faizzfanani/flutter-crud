@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: new Login(),
       routes: <String,WidgetBuilder>{
+        '/login': (BuildContext context)=> new Login(),
         '/dataemployee': (BuildContext context)=> new MyHomePage(),
         '/profile': (BuildContext context)=> new Profile(),
         '/todolist': (BuildContext context)=> new ToDoList(),

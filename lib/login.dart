@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_crud/Register.dart';
 import 'package:flutter_crud/dashboard.dart';
+import 'package:flutter_crud/main.dart';
 import 'package:http/http.dart' as http;
 
 class Login extends StatefulWidget {
@@ -64,7 +65,7 @@ class _LoginState extends State<Login> {
             builder: (BuildContext context) =>
                 new Dashboard(),
           );
-          Navigator.of(context).push(route);
+          Navigator.of(context).pushReplacement(route);
         } else {
           onSignedInErrorPassword();
         }

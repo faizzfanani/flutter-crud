@@ -28,11 +28,7 @@ void confirm (){
         color: Colors.red,
         onPressed: (){
           deleteData();
-          Navigator.of(context).push(
-                      new MaterialPageRoute(
-                        builder: (BuildContext context)=> new MyHomePage(),
-                      )
-                    );
+          Navigator.pushReplacementNamed(context,'/dataemployee');                    
         },
       ),
       new RaisedButton(

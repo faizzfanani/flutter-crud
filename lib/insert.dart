@@ -57,11 +57,7 @@ class _addDataState extends State<addData> {
                   color: Colors.blueAccent,
                   onPressed: () {
                     addData();
-                    Navigator.of(context).pushReplacement(
-                      new MaterialPageRoute(
-                        builder: (BuildContext context)=> new MyHomePage(),
-                      )
-                    );
+                    Navigator.pushReplacementNamed(context,'/dataemployee');
                   },
                 )
               ],

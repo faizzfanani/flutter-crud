@@ -73,11 +73,7 @@ class _updateDataState extends State<updateData> {
                   color: Colors.blueAccent,
                   onPressed: () {
                     updateData();
-                    Navigator.of(context).pushReplacement(
-                      new MaterialPageRoute(
-                        builder: (BuildContext context)=> new MyHomePage(),
-                      )
-                    );
+                    Navigator.pushReplacementNamed(context,'/dataemployee');
                   },
                 )
               ],

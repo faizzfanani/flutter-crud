@@ -44,6 +44,29 @@ class _SettingState extends State<Setting> {
                 ],
               ),
             ),
+            new GestureDetector(
+                    onTap: (){    
+                      Navigator.pushReplacementNamed(context, '/login');                      
+                    },
+                    child: new Container(                  
+                    height: 45,
+                    width: MediaQuery.of(context).size.width/1.2,
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10)
+                      )
+                    ),
+                    child: Center(
+                      child: Text('Logout'.toUpperCase(),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                  ),
+                  ),
           ],
         ),)
       ),
