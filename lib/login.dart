@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_crud/Register.dart';
-import 'package:flutter_crud/dashboard.dart';
 import 'package:flutter_crud/main.dart';
 import 'package:http/http.dart' as http;
 
@@ -60,14 +59,13 @@ class _LoginState extends State<Login> {
     /******************* Check Data ****************************/    
     VerifData(String email, String password, var datadb) {
       getLogin(email);
-      if (data[0]['email'] == email) {
-        if (data[0]['password'] == password) {
-          Navigator.pushReplacementNamed(context,'/dashboard');
-        } else {
-          onSignedInErrorPassword();
-        }
-      } else {
+      if (data[0]['email'] == email && data[0]['password'] == password) {
+        Navigator.pushReplacementNamed(context, '/dashboard');
+      } else if(data[0]['email'] != email){
         onSignedInErrorPseudo();
+      }
+      else {
+        onSignedInErrorPassword();
       }
     }
     return Scaffold(      
@@ -191,10 +189,11 @@ class _LoginState extends State<Login> {
                   ),
                   Spacer(),
 
-                  new GestureDetector(
+                  new GestureDetector(                    
                     onTap: (){    
                       VerifData(email.text, password.text, data);                      
                     },
+                    behavior: HitTestBehavior.opaque,
                     child: new Container(                  
                     height: 45,
                     width: MediaQuery.of(context).size.width/1.2,

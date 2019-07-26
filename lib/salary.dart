@@ -52,7 +52,7 @@ class ItemList extends StatelessWidget{
               child: new Card(
                 child: new ListTile(
               title: new Text(list[i]['nama']),
-              leading: new Icon(Icons.person),
+              leading: new Icon(Icons.attach_money),
               subtitle: new Text("${list[i]['gaji']}"),              
             ),
           ),          

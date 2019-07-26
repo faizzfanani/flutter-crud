@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_crud/SplashScreen.dart';
 import 'package:flutter_crud/dashboard.dart';
 import 'package:flutter_crud/help.dart';
 import 'package:flutter_crud/login.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: new Login(),
+      home: new SplashScreen(),
       routes: <String,WidgetBuilder>{
         '/login': (BuildContext context)=> new Login(),
         '/dashboard': (BuildContext context)=> new Dashboard(),
@@ -99,13 +100,12 @@ class ItemList extends StatelessWidget{
               new MaterialPageRoute(
                 builder: (BuildContext context)=> new Detail(list: list, index: i)
               )
-            ),
-          
-                  child: new Card(
-                    child: new ListTile(
-              title: new Text(list[i]['nama']),
-              leading: new Icon(Icons.person),
-              subtitle: new Text("${list[i]['jabatan']}"),              
+            ),          
+              child: new Card(
+                child: new ListTile(
+                title: new Text(list[i]['nama']),
+                leading: new Icon(Icons.person),
+                subtitle: new Text("${list[i]['jabatan']}"),              
             ),
           ),
           )
