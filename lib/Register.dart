@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'main.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -13,9 +14,9 @@ class _RegisterState extends State<Register> {
   TextEditingController controllerEmail = new TextEditingController();
   TextEditingController controllerPassword = new TextEditingController();
   TextEditingController controllerConfirmPassword = new TextEditingController();
-
+  String api = MyApp.api;
   void addData(){
-  var url="http://192.168.1.19/flutter_crud/insertadmin.php";
+  var url="${api}insertadmin.php";
 
   http.post(url, body: {
     "name": controllerName.text,

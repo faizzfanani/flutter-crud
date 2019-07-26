@@ -46,7 +46,7 @@ class _SettingState extends State<Setting> {
             ),
             new GestureDetector(
                     onTap: (){    
-                      Navigator.pushReplacementNamed(context, '/login');                      
+                      Navigator.pushNamedAndRemoveUntil(context, '/login', ModalRoute.withName('/'));                      
                     },
                     child: new Container(                  
                     height: 45,

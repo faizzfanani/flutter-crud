@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_crud/dashboard.dart';
 import 'package:flutter_crud/help.dart';
 import 'package:flutter_crud/login.dart';
 import 'package:flutter_crud/message.dart';
@@ -16,15 +17,18 @@ import 'Detail.dart';
 import 'insert.dart';
 
 void main() {
-  runApp(new MyApp());
+  runApp(new MyApp());  
 }
+
 class MyApp extends StatelessWidget {
+  static String api = "http://192.168.1.31/flutter_crud/";
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: new Login(),
       routes: <String,WidgetBuilder>{
         '/login': (BuildContext context)=> new Login(),
+        '/dashboard': (BuildContext context)=> new Dashboard(),
         '/dataemployee': (BuildContext context)=> new MyHomePage(),
         '/profile': (BuildContext context)=> new Profile(),
         '/todolist': (BuildContext context)=> new ToDoList(),
@@ -44,9 +48,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String api = MyApp.api;
   Future<List> getData() async {
     final response =
-        await http.get("http://192.168.1.19/flutter_crud/getdata.php");
+        await http.get("${api}getdata.php");
     return json.decode(response.body);
   }
 

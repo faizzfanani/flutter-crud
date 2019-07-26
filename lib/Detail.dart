@@ -12,11 +12,13 @@ class Detail extends StatefulWidget {
 }
 
 class _DetailState extends State<Detail> {
+  String api = MyApp.api;
   void deleteData(){
-  var url="http://192.168.1.19/flutter_crud/delete.php";
+  var url="${api}delete.php";
   http.post(url, body: {
     'id': widget.list[widget.index]['id']
-  });  
+  }); 
+  Navigator.popAndPushNamed(context, '/dataemployee'); 
 }
 
 void confirm (){
@@ -27,8 +29,7 @@ void confirm (){
         child: new Text("DELETE",style: new TextStyle(color: Colors.black),),
         color: Colors.red,
         onPressed: (){
-          deleteData();
-          Navigator.pushReplacementNamed(context,'/dataemployee');                    
+          deleteData();                             
         },
       ),
       new RaisedButton(

@@ -16,6 +16,7 @@ class _LoginState extends State<Login> {
   TextEditingController password = new TextEditingController();
   var data;
   var _isSecured = true;
+  String api = MyApp.api;
 
   @override
   void initState() {
@@ -27,7 +28,7 @@ class _LoginState extends State<Login> {
     Future<String> getLogin(String email) async {
       var response = await http.get(
           Uri.encodeFull(
-              "http://192.168.1.19/flutter_crud/login.php?PSEUDO=${email}"),
+              "${api}login.php?PSEUDO=${email}"),
           headers: {"Accept": "application/json"});
 
       print(response.body);
@@ -61,11 +62,7 @@ class _LoginState extends State<Login> {
       getLogin(email);
       if (data[0]['email'] == email) {
         if (data[0]['password'] == password) {
-          var route = new MaterialPageRoute(
-            builder: (BuildContext context) =>
-                new Dashboard(),
-          );
-          Navigator.of(context).pushReplacement(route);
+          Navigator.pushReplacementNamed(context,'/dashboard');
         } else {
           onSignedInErrorPassword();
         }

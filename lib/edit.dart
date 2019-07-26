@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
 import 'main.dart';
 
 class updateData extends StatefulWidget {
@@ -19,15 +18,17 @@ class _updateDataState extends State<updateData> {
   TextEditingController controllerName = new TextEditingController();
   TextEditingController controllerPosition = new TextEditingController();
   TextEditingController controllerSalary = new TextEditingController();
+  String api = MyApp.api;
 
   void updateData() {
-      var url="http://192.168.1.19/flutter_crud/update.php";
+      var url="${api}update.php";
       http.post(url,body: {
         "id": widget.list[widget.index]['id'],
         "name": controllerName.text,
         "position": controllerPosition.text,
         "salary": controllerSalary.text
       });
+      Navigator.popAndPushNamed(context, '/dataemployee');
     }
 
    @override
@@ -72,8 +73,7 @@ class _updateDataState extends State<updateData> {
                   child: new Text("Update"),
                   color: Colors.blueAccent,
                   onPressed: () {
-                    updateData();
-                    Navigator.pushReplacementNamed(context,'/dataemployee');
+                    updateData();                    
                   },
                 )
               ],

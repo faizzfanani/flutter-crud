@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
 import 'main.dart';
+
 class addData extends StatefulWidget {
   @override
   _addDataState createState() => _addDataState();
@@ -11,9 +11,10 @@ class _addDataState extends State<addData> {
   TextEditingController controllerName = new TextEditingController();
   TextEditingController controllerPosition = new TextEditingController();
   TextEditingController controllerSalary = new TextEditingController();
+  String api = MyApp.api;
 
   void addData(){
-  var url="http://192.168.1.19/flutter_crud/insert.php";
+  var url="${api}insert.php";
 
   http.post(url, body: {
     "name": controllerName.text,
@@ -57,7 +58,7 @@ class _addDataState extends State<addData> {
                   color: Colors.blueAccent,
                   onPressed: () {
                     addData();
-                    Navigator.pushReplacementNamed(context,'/dataemployee');
+                    Navigator.popAndPushNamed(context,'/dataemployee');
                   },
                 )
               ],
